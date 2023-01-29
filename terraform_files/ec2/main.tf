@@ -9,7 +9,7 @@ resource "aws_instance" "public-ec2-x" {
     Name = var.instance_name
   }
   provisioner "local-exec" {
-    command = var.pub_ip_state ? "echo public-instance-${var.instnace-number}-public-ip: ${self.public_ip} >> all-ips.txt" : "echo private-instance-${var.instnace-number}-private-ip: ${self.private_ip} >> required_ips.txt"
+    command = var.pub_ip_state ? "echo public-instance-${var.instnace-number}-public-ip: ${self.public_ip} >> required_ips.txt" : "echo private-instance-${var.instnace-number}-private-ip: ${self.private_ip} >> required_ips.txt"
   }
   
  provisioner "remote-exec" {

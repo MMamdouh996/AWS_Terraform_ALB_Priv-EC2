@@ -9,12 +9,6 @@ module "network_module" {
   route_table_in = "0.0.0.0/0"
 }
 
-# module "subnet" {
-#    source   = "./Network"
-#    subnet_az      = ["us-east-1a", "us-east-1b"]
-#    public-cidrs   = ["10.1.0.0/28", "10.1.1.0/28"]
-# }
-
 module "public_SG" {
   source       = "./SecurityGroup"
   SG_name      = "public-SG"
@@ -162,7 +156,7 @@ module "private_alb" {
 #   instance_template_version = "$Latest"
 #   ASG_LT_SG = module.public_SG.SG-ID
 #   key_pair_name = "lab4"
-#   remote-commands = [
+#   remote_commands = [
 #     "sudo apt update -y",
 #     "sudo apt install -y nginx",
 #     "echo 'server { \n listen 80 default_server; \n  listen [::]:80 default_server; \n  root /var/www/html; \n  index index.html index.htm index.nginx-debian.html; \n  server_name _; \n  location / { \n  proxy_pass http://${module.private_alb.lb-dns}; \n try_files $uri $uri/ =404; \n   } \n}' > default",
@@ -170,7 +164,10 @@ module "private_alb" {
 #     "sudo systemctl stop nginx",
 #     "sudo systemctl start nginx",
 #   ]
-
+#   TG_arn = [module.proxy_alb.TG_arn]
+#   policy_name = "Proxies ASG 1"
+#   scaling_adjustment = "1"
+#   depends = module.proxy_alb
 #   ASG_name                  = "proxy_Auto_Scaling_Group"
 #   pub_ip_state_ASG          = "true"
 #   ASG_subnets_id             = [module.network_module.public-subnet-az1-id, module.network_module.public-subnet-az1-id]
