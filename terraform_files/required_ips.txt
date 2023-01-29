@@ -1,0 +1,4 @@
+private-instance- 1 -private-ip: 10.1.2.10
+private-instance- 2 -private-ip: 10.1.3.4
+private-instance- 2 -private-ip: 10.1.3.8
+private-instance- 1 -private-ip: 10.1.2.4
